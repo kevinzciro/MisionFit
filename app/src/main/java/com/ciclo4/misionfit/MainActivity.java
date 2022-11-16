@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener btnListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, ProfileActivity.class);
+            Intent intent = new Intent(context, SearchBienestarActivity.class);
             startActivity(intent);
             finish();
         }

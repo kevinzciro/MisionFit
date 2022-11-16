@@ -1,6 +1,7 @@
 package com.ciclo4.misionfit.config;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ciclo4.misionfit.HistorialActivity;
 import com.ciclo4.misionfit.R;
+import com.ciclo4.misionfit.models.Medition;
 import com.ciclo4.misionfit.models.User;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    Context context;
-    List<User> items;
 
-    public MyAdapter(Context context, List<User> items) {
+
+    Context context;
+    List<Medition> items;
+
+    public MyAdapter(Context context, List<Medition> items) {
         this.context = context;
         this.items = items;
     }
@@ -34,6 +40,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 //        holder.nameView.setText(items.get(position).getName());
 //        holder.ownerView.setText(items.get(position).getOwner());
 //        holder.imageView.setImageResource(items.get(position).getImage());
+        holder.nameView.setText(items.get(position).getDate());
+        holder.ownerView.setText(items.get(position).getMedition().toString());
     }
 
     @Override
@@ -47,9 +55,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView2);
-            nameView = itemView.findViewById(R.id.name);
-            ownerView = itemView.findViewById(R.id.owner);
+            nameView = itemView.findViewById(R.id.date);
+            ownerView = itemView.findViewById(R.id.medition);
         }
 
     }
