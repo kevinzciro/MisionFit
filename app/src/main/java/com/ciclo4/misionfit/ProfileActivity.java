@@ -1,5 +1,6 @@
 package com.ciclo4.misionfit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -7,18 +8,29 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ciclo4.misionfit.models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
 
     ImageButton btnHomeH, btnPerfilH, btnHistorialH;
     ConstraintLayout historialLay, salirLay;
     Context contextPerfil;
+    TextView txtNomb;
     FirebaseAuth au;
 
     private final View.OnClickListener historialLayListener = new View.OnClickListener(){
@@ -87,6 +99,35 @@ public class ProfileActivity extends AppCompatActivity {
             Intent it = new Intent(ProfileActivity.this,MainActivity.class);
             startActivity(it);
         }
+
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        txtNomb = findViewById(R.id.txtNomb);
+
+        db.collection("Usuarios")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                Log.d("Main",document.getId() + "=>" + document.getData());
+                                String email = document.getString("email");
+                                String nombre = document.getString("nombre");
+                                String apellido = document.getString("apellido");
+                                String rol = document.getString("rol");
+                                String id = document.getId();
+                                User user1 = new User(email, nombre, apellido, rol);
+                                Log.d("Main", user1.getRol());
+                                if(Objects.equals(user1.getEmail(), user.getEmail())){
+                                    txtNomb.setText(user1.getNombre());
+                                }
+                            }
+                        }else{
+                            Log.w("Main", "Error getting documents", task.getException());
+                        }
+                    }
+                });
     }
 
     View.OnClickListener ev = new View.OnClickListener()

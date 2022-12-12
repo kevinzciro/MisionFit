@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ciclo4.misionfit.models.Medition;
@@ -20,8 +21,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class MedicionActivity extends AppCompatActivity {
 
@@ -30,6 +36,8 @@ public class MedicionActivity extends AppCompatActivity {
     Context contextMedir;
     EditText txtAltura, txtPeso;
     FirebaseFirestore db;
+    TextView txtImc, txtRecom;
+    FirebaseAuth au;
 
     private final View.OnClickListener btnMedicionMListener = new View.OnClickListener(){
         @Override
@@ -100,6 +108,16 @@ public class MedicionActivity extends AppCompatActivity {
                                 startActivity(it);
                             }
                         });
+                txtImc.setText(medicion.toString());
+                if (medicion <= 18.5){
+                    txtRecom.setText("Estas en un rango bajo");
+                }else if(medicion > 18.5 && medicion < 25.0){
+                    txtRecom.setText("Estas en un rango normal");
+                }else if(medicion >= 25.0 && medicion < 30){
+                    txtRecom.setText("Estas en un rango un poco alto");
+                }else if(medicion > 30){
+                    txtRecom.setText("Estas en un rango alto");
+                }
             }else{
                 Toast.makeText(MedicionActivity.this, "Ingrese datos de altura y peso.", Toast.LENGTH_SHORT).show();
             }
@@ -135,10 +153,8 @@ public class MedicionActivity extends AppCompatActivity {
         btnMedirImc = findViewById(R.id.btnMedirImc);
         btnMedirImc.setOnClickListener(btnMedirImcListener);
 
-
-
-
-
+        txtImc = findViewById(R.id.txtImc);
+        txtRecom = findViewById(R.id.txtRecom);
 
     }
 

@@ -18,15 +18,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ciclo4.misionfit.config.Adapter;
+
+import com.ciclo4.misionfit.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         au = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         txtCorreo = findViewById(R.id.txtCorreo);
         txtContrasena = findViewById(R.id.txtContrasena);
@@ -68,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
     View.OnClickListener ev = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
             String correo = txtCorreo.getText().toString();
             String contrasena = txtContrasena.getText().toString();
             au.signInWithEmailAndPassword(correo,contrasena)
@@ -75,16 +82,48 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Acceso Concedido", Toast.LENGTH_SHORT).show();
                                 if(task.isSuccessful()) {
                                     FirebaseUser user = au.getCurrentUser();
                                     Log.d("MainActivity", "Usuario:" + user.getEmail());
-                                    Toast.makeText(LoginActivity.this, "Acceso Concedido", Toast.LENGTH_SHORT).show();
                                     Intent it = new Intent(LoginActivity.this, HomeActivity.class);
-                                    startActivity(it);
+                                    db.collection("Usuarios")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if(task.isSuccessful()){
+                                                        for(QueryDocumentSnapshot document : task.getResult()){
+                                                            Log.d("Main",document.getId() + "=>" + document.getData());
+                                                            String email = document.getString("email");
+                                                            String nombre = document.getString("nombre");
+                                                            String apellido = document.getString("apellido");
+                                                            String rol = document.getString("rol");
+                                                            String id = document.getId();
+                                                            User user1 = new User(email, nombre, apellido, rol);
+                                                            Log.d("Main", user1.getRol());
+                                                            if(Objects.equals(user1.getEmail(), user.getEmail())){
+                                                                if (Objects.equals(user1.getRol(), "Estandar")){
+                                                                    Toast.makeText(LoginActivity.this, "Acceso Concedido", Toast.LENGTH_SHORT).show();
+                                                                    it.putExtra("nombre", user1.getNombre());
+                                                                    it.putExtra("apellido", user1.getApellido());
+                                                                    it.putExtra("email", user1.getEmail());
+                                                                    startActivity(it);
+                                                                }
+                                                                else {
+                                                                    Toast.makeText(LoginActivity.this,"Ustes es un usuario de bienestar...",
+                                                                            Toast.LENGTH_SHORT).show();
+                                                                    FirebaseAuth.getInstance().signOut();
+                                                                }
+                                                            }
+                                                        }
+                                                    }else{
+                                                        Log.w("Main", "Error getting documents", task.getException());
+                                                    }
+                                                }
+                                            });
                                 }
                             }else{
-                                Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Verifique su correo y contraseña...", Toast.LENGTH_SHORT).show();
                             }
                         }
                     })

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.ciclo4.misionfit.models.Medition;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +32,7 @@ public class HistorialActivity extends AppCompatActivity {
     ImageButton btnHomeH, btnPerfilH, btnHistorialH;
     Button btnMedicionM, btnHistorialM;
     Context contextHistorial;
+    TextView txtImc, txtRecom;
     FirebaseAuth au;
 
     private final View.OnClickListener btnMedicionMListener = new View.OnClickListener(){
@@ -106,6 +108,9 @@ public class HistorialActivity extends AppCompatActivity {
         btnMedicionM = findViewById(R.id.btnMedirM);
         btnMedicionM.setOnClickListener(btnMedicionMListener);
 
+        txtImc = findViewById(R.id.txtImc);
+        txtRecom = findViewById(R.id.txtRecom);
+
         au= FirebaseAuth.getInstance();
         FirebaseUser user = au.getCurrentUser();
 
@@ -127,18 +132,20 @@ public class HistorialActivity extends AppCompatActivity {
                                 }
                             }
                             MyAdapter adapter = new MyAdapter(getApplicationContext(), medList);
-//                            adapter.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    Log.d("MainActivity","Presionado: " + medList.get(recyclerView.getChildAdapterPosition(v)).getMedicion());
-//                                    Intent it = new Intent(contextHistorial, HistorialActivity.class);
-//                                    it.putExtra("id", medList.get(recyclerView.getChildAdapterPosition(v)).getId());
-//                                    it.putExtra("medicion", medList.get(recyclerView.getChildAdapterPosition(v)).getMedicion());
-//                                    it.putExtra("fecha", medList.get(recyclerView.getChildAdapterPosition(v)).getFecha());
-//                                    startActivity(it);
-//                                }
-//                            });
                             recyclerView.setAdapter(adapter);
+                            Double ultimaMed = medList.get(0).getMedicion();
+                            txtImc.setText(ultimaMed.toString());
+                            if (ultimaMed <= 18.5){
+                                txtRecom.setText("Estas en un rango bajo");
+                            }else if(ultimaMed > 18.5 && ultimaMed < 25.0){
+                                txtRecom.setText("Estas en un rango normal");
+                            }else if(ultimaMed >= 25.0 && ultimaMed < 30){
+                                txtRecom.setText("Estas en un rango un poco alto");
+                            }else if(ultimaMed > 30){
+                                txtRecom.setText("Estas en un rango alto");
+                            }
+                            Log.d("Main", ultimaMed.toString());
+
                         }else{
                             Log.w("Main", "Error getting documents", task.getException());
                         }
