@@ -141,13 +141,13 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button7"
+            app:layout_constraintEnd_toStartOf="@+id/btnHistorial"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/btnHistorial"
             android:layout_width="146dp"
             android:layout_height="41dp"
             android:layout_marginTop="20dp"
@@ -166,7 +166,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btnMedir"
         android:layout_width="269dp"
         android:layout_height="70dp"
         android:layout_marginTop="36dp"
@@ -191,25 +191,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button8"
+        app:layout_constraintTop_toBottomOf="@+id/btnMedir"
         app:layout_constraintVertical_bias="1.0">
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/btnHomeH"
             android:layout_width="61dp"
             android:layout_height="62dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton7"
+            app:layout_constraintEnd_toStartOf="@+id/btnPerfilH"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageButton6"
+            app:layout_constraintStart_toEndOf="@+id/btnHistorialH"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/home" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/btnHistorialH"
             android:layout_width="54dp"
             android:layout_height="59dp"
             android:layout_marginStart="77dp"
@@ -222,7 +222,7 @@
             app:srcCompat="@drawable/search" />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/btnPerfilH"
             android:layout_width="55dp"
             android:layout_height="59dp"
             android:layout_marginEnd="77dp"

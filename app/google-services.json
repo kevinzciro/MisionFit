@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "572552460222",
+    "firebase_url": "https://pruebaapi-3d4ed-default-rtdb.firebaseio.com",
+    "project_id": "pruebaapi-3d4ed",
+    "storage_bucket": "pruebaapi-3d4ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572552460222:android:36015493b3a01ad5012bef",
+        "android_client_info": {
+          "package_name": "com.ciclo4.misionfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572552460222-8d0vpfvgd2e5jvm3so5b61kmnuq4diqm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhEl-HFTDCNV-_vByo7rKIMCIHxvpgEiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "572552460222-8d0vpfvgd2e5jvm3so5b61kmnuq4diqm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

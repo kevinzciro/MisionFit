@@ -67,21 +67,21 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/btnHomeH"
             android:layout_width="61dp"
             android:layout_height="62dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton7"
+            app:layout_constraintEnd_toStartOf="@+id/btnPerfilH"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageButton6"
+            app:layout_constraintStart_toEndOf="@+id/btnHistorialH"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/home" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/btnHistorialH"
             android:layout_width="54dp"
             android:layout_height="59dp"
             android:layout_marginStart="77dp"
@@ -94,7 +94,7 @@
             app:srcCompat="@drawable/search" />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/btnPerfilH"
             android:layout_width="55dp"
             android:layout_height="59dp"
             android:layout_marginEnd="77dp"
@@ -180,6 +180,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/salirLay"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginTop="16dp"
@@ -190,11 +191,11 @@
 
         <ImageView
             android:id="@+id/imageView5"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
             android:layout_marginStart="7dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="1dp"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
             android:background="@drawable/borders2"
             android:backgroundTint="@color/pink1"
             android:padding="3dp"
@@ -292,7 +293,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/historialLay">
 
         <ImageView
             android:id="@+id/imageView9"
@@ -338,7 +339,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
+        android:id="@+id/historialLay"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginTop="11dp"

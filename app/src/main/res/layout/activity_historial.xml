@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/btnMedirM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
@@ -29,14 +29,14 @@
             android:textColor="@color/pink1"
             app:backgroundTint="@color/pink2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button13"
+            app:layout_constraintEnd_toStartOf="@+id/btnHistorialM"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/btnHistorialM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="29dp"
@@ -94,21 +94,21 @@
         app:layout_constraintVertical_bias="0.882">
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/btnHomeH"
             android:layout_width="61dp"
             android:layout_height="62dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton7"
+            app:layout_constraintEnd_toStartOf="@+id/btnPerfilH"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageButton6"
+            app:layout_constraintStart_toEndOf="@+id/btnHistorialH"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/home" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/btnHistorialH"
             android:layout_width="54dp"
             android:layout_height="59dp"
             android:layout_marginStart="77dp"
@@ -121,7 +121,7 @@
             app:srcCompat="@drawable/search" />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/btnPerfilH"
             android:layout_width="55dp"
             android:layout_height="59dp"
             android:layout_marginEnd="77dp"
